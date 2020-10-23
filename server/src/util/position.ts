@@ -1,5 +1,6 @@
+var pontoPS: number;
+
 export default function pegarPosition(posicao: number ){
-    var pontoPS: number;
     var position = posicao;
 
     if (position >= 14) {
@@ -8,22 +9,19 @@ export default function pegarPosition(posicao: number ){
         switch (position) {
             case 1:
                 pontoPS = 3;
-                console.log("Primeiro")
                 break;
             case 2:
                 pontoPS = 2;
-                console.log("Segundo")
                 break;
             case 3:
                 pontoPS = 1.5;
-                console.log("Terceiro")
                 break;
             case 4:
                 pontoPS = 1;
-                console.log("Quarto")
                 break;
         
             default:
+                console.log("err: default position")
                 break;
         }
     } else { 

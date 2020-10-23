@@ -1,4 +1,4 @@
-export default function pegarRatingK(ratingAtual){
+export default function pegarRatingK(ratingAtual: number){
     var k;
     if (ratingAtual < 999) {
         k = 40;
