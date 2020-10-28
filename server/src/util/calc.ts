@@ -4,7 +4,6 @@
 
 // Rating Novo = ranting atual + K * (pontosPS - pontosES)
 
-
 var k = 0;
 var pontoPS = 1;
 

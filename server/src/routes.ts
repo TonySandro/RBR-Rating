@@ -1,27 +1,9 @@
-import express, { request, response } from 'express';
-import db from './database/connection';
-// import PlayerController from './controller/playerController';
+import express, { Request, Response } from 'express';
+import PlayerController from './controller/PlayerController';
 
 const routes = express.Router();
+const playerController = new PlayerController();
 
-routes.post("/players", async (request, response) => {
-    const {
-        position,
-        name,
-        oldRating,
-        newRating,
-
-    } = request.body
-
-    await db('players').insert({
-        position,
-        name,
-        oldRating,
-        newRating,
-    })
-
-    return response.send()
-});
-// routes.get("/classes", classesControllers.index)
+routes.post("/players", playerController.create);
 
 export default routes

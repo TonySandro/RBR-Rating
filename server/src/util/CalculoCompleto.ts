@@ -1,3 +1,56 @@
+function pegarRatingK(ratingAtual: number){
+    var k;
+    if (ratingAtual < 999) {
+        k = 40;
+    } else if (ratingAtual > 999 && ratingAtual < 1999) {
+        k = 20;
+    } else if (ratingAtual > 1999 && ratingAtual < 2999) {
+        k = 10;
+    };
+    return k;
+}
+
+var pontoPS: number;
+
+ function pegarPosition(posicao: number ){
+    var position = posicao;
+
+    if (position >= 14) {
+         pontoPS = 0;
+    }else if (position <= 4) {
+        switch (position) {
+            case 1:
+                pontoPS = 3;
+                break;
+            case 2:
+                pontoPS = 2;
+                break;
+            case 3:
+                pontoPS = 1.5;
+                break;
+            case 4:
+                pontoPS = 1;
+                break;
+        
+            default:
+                console.log("err: default position")
+                break;
+        }
+    } else { 
+        // for (let p = 4; p != position; p++) {
+        //     pontoPS = pontoPS - 0.1;
+        //     console.log(`Valor de p: ${p}, valor ${pontoPS}`)
+        // }
+        let p = 4;
+        while ( p != position ){
+            pontoPS = pontoPS - 0.1;
+            p++;
+            console.log(`Valor de p: ${p}, valor ${pontoPS}`)
+        }
+    }
+    return pontoPS
+}
+
 var dif, positionDif = 0;
 var sup = 50, inf = 50;
 var pontoES = 800;
