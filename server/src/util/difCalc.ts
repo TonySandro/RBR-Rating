@@ -1,319 +1,326 @@
-var dif, positionDif = 0;
-var sup = 50, inf = 50;
-var pontoES = 800;
+export default function difCalc(mediaRating: number, ratingAtual: number) {
+    var media = mediaRating
+    var rating = ratingAtual
+
+    var positionDif = 0;
+    var sup = 50, inf = 50;
+    var diferenca = media - rating
+    var pontoES: Number = 0
 
 function calcSupInf() {
-    sup = sup + positionDif;
-    inf = inf - positionDif;
+    sup = (sup + positionDif) * 0.01
+    inf = (inf + positionDif) * 0.01
+
+    if (sup >= inf) {
+        pontoES = sup
+    }else pontoES = inf
 }
 
-// function Dif(pontoES: number){
-
     switch (true) {
-        case (pontoES >= 0 && pontoES <= 3):
+        case (diferenca >= 0 && diferenca <= 3):
             positionDif = 0;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 4 && pontoES <= 10):
+        case (diferenca >= 4 && diferenca <= 10):
             positionDif = 1;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 11 && pontoES <= 17):
+        case (diferenca >= 11 && diferenca <= 17):
             positionDif = 2;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 18 && pontoES <= 25):
+        case (diferenca >= 18 && diferenca <= 25):
             positionDif = 3;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 26 && pontoES <= 32):
+        case (diferenca >= 26 && diferenca <= 32):
             positionDif = 4;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 33 && pontoES <= 39):
+        case (diferenca >= 33 && diferenca <= 39):
             positionDif = 5;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 40 && pontoES <= 46):
+        case (diferenca >= 40 && diferenca <= 46):
             positionDif = 6;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 47 && pontoES <= 53):
+        case (diferenca >= 47 && diferenca <= 53):
             positionDif = 7;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 54 && pontoES <= 61):
+        case (diferenca >= 54 && diferenca <= 61):
             positionDif = 8;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 62 && pontoES <= 68):
+        case (diferenca >= 62 && diferenca <= 68):
             positionDif = 9;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 69 && pontoES <= 76):
+        case (diferenca >= 69 && diferenca <= 76):
             positionDif = 10;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 77 && pontoES <= 83):
+        case (diferenca >= 77 && diferenca <= 83):
             positionDif = 11;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 84 && pontoES <= 91):
+        case (diferenca >= 84 && diferenca <= 91):
             positionDif = 12;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 92 && pontoES <= 98):
+        case (diferenca >= 92 && diferenca <= 98):
             positionDif = 13;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 99 && pontoES <= 106):
+        case (diferenca >= 99 && diferenca <= 106):
             positionDif = 14;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 107 && pontoES <= 113):
+        case (diferenca >= 107 && diferenca <= 113):
             positionDif = 15;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 114 && pontoES <= 121):
+        case (diferenca >= 114 && diferenca <= 121):
             positionDif = 16;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 122 && pontoES <= 129):
+        case (diferenca >= 122 && diferenca <= 129):
             positionDif = 17;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 130 && pontoES <= 137):
+        case (diferenca >= 130 && diferenca <= 137):
             positionDif = 18;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 138 && pontoES <= 145):
+        case (diferenca >= 138 && diferenca <= 145):
             positionDif = 19;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 146 && pontoES <= 153):
+        case (diferenca >= 146 && diferenca <= 153):
             positionDif = 20;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 154 && pontoES <= 162):
+        case (diferenca >= 154 && diferenca <= 162):
             positionDif = 21;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 163 && pontoES <= 170):
+        case (diferenca >= 163 && diferenca <= 170):
             positionDif = 22;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 171 && pontoES <= 179):
+        case (diferenca >= 171 && diferenca <= 179):
             positionDif = 23;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
 
-        case (pontoES >= 180 && pontoES <= 188):
+        case (diferenca >= 180 && diferenca <= 188):
             positionDif = 24;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 189 && pontoES <= 197):
+        case (diferenca >= 189 && diferenca <= 197):
             positionDif = 25;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 198 && pontoES <= 206):
+        case (diferenca >= 198 && diferenca <= 206):
             positionDif = 26;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 207 && pontoES <= 215):
+        case (diferenca >= 207 && diferenca <= 215):
             positionDif = 27;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 216 && pontoES <= 225):
+        case (diferenca >= 216 && diferenca <= 225):
             positionDif = 28;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 226 && pontoES <= 235):
+        case (diferenca >= 226 && diferenca <= 235):
             positionDif = 29;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 236 && pontoES <= 245):
+        case (diferenca >= 236 && diferenca <= 245):
             positionDif = 30;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 246 && pontoES <= 256):
+        case (diferenca >= 246 && diferenca <= 256):
             positionDif = 31;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 257 && pontoES <= 267):
+        case (diferenca >= 257 && diferenca <= 267):
             positionDif = 32;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 268 && pontoES <= 278):
+        case (diferenca >= 268 && diferenca <= 278):
             positionDif = 33;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 279 && pontoES <= 290):
+        case (diferenca >= 279 && diferenca <= 290):
             positionDif = 34;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 291 && pontoES <= 302):
+        case (diferenca >= 291 && diferenca <= 302):
             positionDif = 35;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 303 && pontoES <= 315):
+        case (diferenca >= 303 && diferenca <= 315):
             positionDif = 36;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 316 && pontoES <= 328):
+        case (diferenca >= 316 && diferenca <= 328):
             positionDif = 37;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 329 && pontoES <= 344):
+        case (diferenca >= 329 && diferenca <= 344):
             positionDif = 38;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 345 && pontoES <= 357):
+        case (diferenca >= 345 && diferenca <= 357):
             positionDif = 39;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 358 && pontoES <= 374):
+        case (diferenca >= 358 && diferenca <= 374):
             positionDif = 40;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 375 && pontoES <= 391):
+        case (diferenca >= 375 && diferenca <= 391):
             positionDif = 41;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 392 && pontoES <= 411):
+        case (diferenca >= 392 && diferenca <= 411):
             positionDif = 42;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 412 && pontoES <= 432):
+        case (diferenca >= 412 && diferenca <= 432):
             positionDif = 43;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 433 && pontoES <= 456):
+        case (diferenca >= 433 && diferenca <= 456):
             positionDif = 44;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 457 && pontoES <= 484):
+        case (diferenca >= 457 && diferenca <= 484):
             positionDif = 45;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 485 && pontoES <= 517):
+        case (diferenca >= 485 && diferenca <= 517):
             positionDif = 46;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 518 && pontoES <= 559):
+        case (diferenca >= 518 && diferenca <= 559):
             positionDif = 47;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 560 && pontoES <= 619):
+        case (diferenca >= 560 && diferenca <= 619):
             positionDif = 48;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 620 && pontoES <= 735):
+        case (diferenca >= 620 && diferenca <= 735):
             positionDif = 49;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
             
-        case (pontoES >= 735):
+        case (diferenca >= 735):
             positionDif = 50;
             calcSupInf();
-            console.log(`Sup ${sup} --- Inf ${inf}`)
+            console.log(pontoES)
             break;
     
         default:
@@ -321,4 +328,5 @@ function calcSupInf() {
             break;
     }
 
-// }
+    return pontoES
+}

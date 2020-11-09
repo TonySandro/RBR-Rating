@@ -5,5 +5,6 @@ const routes = express.Router();
 const playerController = new PlayerController();
 
 routes.post("/players", playerController.create);
+routes.get("/media", playerController.selectMedia);
 
 export default routes

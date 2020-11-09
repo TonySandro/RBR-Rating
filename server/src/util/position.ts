@@ -1,6 +1,5 @@
-var pontoPS: number;
-
 export default function pegarPosition(posicao: number ){
+    var pontoPS = 0;
     var position = posicao;
 
     if (position >= 14) {
