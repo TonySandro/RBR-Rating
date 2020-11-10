@@ -5,13 +5,13 @@ export default function difCalc(mediaRating: number, ratingAtual: number) {
     var positionDif = 0;
     var sup = 50, inf = 50;
     var diferenca = media - rating
-    var pontoES: Number = 0
+    var pontoES: number = 0
 
 function calcSupInf() {
     sup = (sup + positionDif) * 0.01
     inf = (inf + positionDif) * 0.01
 
-    if (sup >= inf) {
+    if (rating >= media) {
         pontoES = sup
     }else pontoES = inf
 }

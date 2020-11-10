@@ -28,7 +28,8 @@ export default function pegarPosition(posicao: number ){
         //     pontoPS = pontoPS - 0.1;
         //     console.log(`Valor de p: ${p}, valor ${pontoPS}`)
         // }
-        let p = 4;
+        
+        let p = 4; //posição 
         while ( p != position ){
             pontoPS = pontoPS - 0.1;
             p++;

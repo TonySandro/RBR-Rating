@@ -5,8 +5,8 @@ export async function up(knex: Knex) {
     table.increments('id').primary();
     table.integer('position').notNullable();
     table.string('name').notNullable();
-    table.integer('oldRating').notNullable();
-    table.integer('newRating').notNullable();
+    table.integer('currentRating').notNullable();
+    table.integer('newRating');
   });
 }
 
