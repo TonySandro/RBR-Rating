@@ -9,22 +9,22 @@ import pegarPosition from "./position";
 
 // Rating Novo = ranting atual + K * (pontosPS - pontosES)
 
-var k = 0;
-var pontoPS = 1;
+// var k = 0;
+// var pontoPS = 1;
 
-var ratingAtual = 0;
+// var ratingAtual = 0;
 
-var mediaRating = 114;
+// var mediaRating = 114;
 
 // position(1);
-pontoES = mediaRating - ratingAtual;
+// pontoES = mediaRating - ratingAtual;
 //Falta a tabela DIF para o resultado de pontoES
-var pontoES = mediaRating - ratingAtual * (-1);
+// var pontoES = mediaRating - ratingAtual * (-1);
 
-var ratingNovo = ratingAtual + k * (pontoPS - pontoES);
+// var ratingNovo = ratingAtual + k * (pontoPS - pontoES);
 
 
-console.log("Rating Novo = " + ratingNovo);
+// console.log("Rating Novo = " + ratingNovo);
 
 
 
