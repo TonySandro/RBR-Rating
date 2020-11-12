@@ -8,5 +8,6 @@ export default function pegarRatingK(ratingAtual: number){
     } else if (rating > 1999 && rating < 2999) {
         k = 10;
     };
+    console.log("Valor de k: " + k)
     return k;
 }
