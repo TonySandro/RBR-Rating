@@ -38,6 +38,6 @@ export default function pegarPosition(posicao: number ){
         
     }
 
-    console.log(`Valor de p: ${position}, valor ${pontoPS}`)
+    console.log(`Posição: ${position}, valor ${pontoPS}`)
     return pontoPS
 }
