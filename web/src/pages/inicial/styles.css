@@ -1,4 +1,34 @@
 form {
-    align-items: center;
-    background-color: wheat;
+    margin: auto;
+    width: 50%;
+    padding: 20px;
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 2.5px;
+    margin-left: 25px;
+    margin-right: 4px;
+}
+button{
+    margin-left: 40px;
+    padding: 2.5px;
+    width: 100px;
+    border-radius: 4px;
+    border: 1.5px solid;
+    background: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+button:hover,
+button:focus {
+background: black;
+color: white;
+}
+
+.number {
+    width: 60px;
+    
 }

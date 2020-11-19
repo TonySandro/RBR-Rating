@@ -10,12 +10,12 @@ export const StyledTableCell = withStyles((theme: Theme) =>
       color: theme.palette.common.white,
     },
     body: {
-      fontSize: 14,
+      fontSize: 16,
     },
   }),
-)(TableCell);
-
-export const StyledTableRow = withStyles((theme: Theme) =>
+  )(TableCell);
+  
+  export const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
     root: {
       '&:nth-of-type(odd)': {

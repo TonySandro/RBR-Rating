@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -19,6 +20,11 @@ const useStyles = makeStyles({
 });
 
 function CustomizedTables() {
+
+  const [position, setPosition] = useState('')
+  const [name, setName] = useState('')
+  const [currentRating, setcurrentRating] = useState('')
+
   const [player, setPlayer] = useState([
     { id: 0, position: 0, name: '', currentRating: 0, newRating: 0 }
   ])
@@ -29,21 +35,48 @@ function CustomizedTables() {
     })
   }, [])
 
-  // useEffect(() => {
-  //   api.get('players').then(response => {
-  //     setPlayer(response.data)
-  //   })
-  // }, [])
+  function handleCreate(e: FormEvent) {
+    e.preventDefault();
+
+    api.post('/new_player', {
+      position,
+      name,
+      currentRating
+    }).then(() => {
+      window.location.reload(true)
+    }).catch((err) => {
+      console.log(err)
+      alert('Erro na insersão!');
+    })
+  }
 
   const classes = useStyles();
 
   return (
     <div>
-      <form>
-        <input type="number" name="position" placeholder="Posição" />
-        <input type="text" name="name" placeholder="Nome" />
-        <input type="number" name="currentRating" placeholder="Rating atual" />
-        <button>add</button>
+      <form onSubmit={handleCreate}>
+        <input
+          type="text"
+          placeholder="Nome"
+          value={name}
+          onChange={(e) => { setName(e.target.value) }}
+        />
+        <input
+          className="number"
+          type="number"
+          placeholder="Posição"
+          value={position}
+          onChange={(e) => { setPosition(e.target.value) }}
+        />
+        <input
+          className="number"
+          type="number"
+          placeholder="Rating atual"
+          value={currentRating}
+          onChange={(e) => { setcurrentRating(e.target.value) }}
+        />
+
+        <button type="submit" >Adicionar</button>
       </form>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
