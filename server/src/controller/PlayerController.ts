@@ -4,6 +4,12 @@ import newRating from '../util/newRating';
 import updateAll from '../util/updateAll';
 
 export default class PlayerController {
+
+    async view ( request: Request, response: Response ) {
+        const result = await db("players").select("*")
+        
+        return response.json(result)
+    }
     async updateAll (request: Request, response: Response){
         try {
             updateAll()
@@ -32,6 +38,7 @@ export default class PlayerController {
         const  { id } = request.params
 
         const result = await db('players').where('id', id).del()
+        updateAll()
 
         return response.json(result)
     }

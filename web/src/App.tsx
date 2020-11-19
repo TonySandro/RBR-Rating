@@ -1,10 +1,9 @@
 import React from 'react';
+import Routes from './routes/router';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Routes/>
   );
 }
 
