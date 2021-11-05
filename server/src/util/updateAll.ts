@@ -2,6 +2,8 @@ import db from "../database/connection"
 import newRating from "./newRating"
 
 export default async function updateAll (){
+    console.log("Function UpdateAll")
+    console.log("========================")
     try {
         const ids = await db('players').select({id: 'id'})
 
