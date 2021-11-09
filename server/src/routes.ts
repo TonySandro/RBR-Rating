@@ -9,6 +9,6 @@ routes.post("/new_player", playerController.create)
 routes.delete("/remove/:id", playerController.remove)
 routes.put("/newRating/:id", playerController.update)
 
-// routes.put("/updateall", playerController.updateAll)
+routes.put("/updateall", playerController.updateAll)
 
 export default routes

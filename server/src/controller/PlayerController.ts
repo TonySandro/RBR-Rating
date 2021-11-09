@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import db from '../database/connection';
 import newRating from '../util/newRating';
-// import updateAll from '../util/updateAll';
+import updateAll from '../util/updateAll';
 
 export default class PlayerController {
 
@@ -10,17 +10,17 @@ export default class PlayerController {
         
         return response.json(result)
     }
-    // async updateAll (request: Request, response: Response){
-    //     try {
-    //         updateAll()
+    async updateAll (request: Request, response: Response){
+        try {
+            updateAll()
 
-    //         return response.send()
-    //     } catch (error) {
-    //         return response.status(400).json({
-    //             error: 'Unexpected error while update all players'
-    //         })
-    //     }
-    // }
+            return response.send()
+        } catch (error) {
+            return response.status(400).json({
+                error: 'Unexpected error while update all players'
+            })
+        }
+    }
 
     async update(request: Request, response: Response){
         const { id } = request.params
@@ -38,7 +38,7 @@ export default class PlayerController {
         const  { id } = request.params
 
         const result = await db('players').where('id', id).del()
-        // updateAll()
+        updateAll()
 
         return response.json(result)
     }
