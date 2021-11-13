@@ -5,12 +5,12 @@ import updateAll from '../util/updateAll';
 
 export default class PlayerController {
 
-    async view ( request: Request, response: Response ) {
+    async view(request: Request, response: Response) {
         const result = await db("players").select("*")
-        
+
         return response.json(result)
     }
-    async updateAll (request: Request, response: Response){
+    async updateAll(request: Request, response: Response) {
         try {
             updateAll()
 
@@ -22,7 +22,7 @@ export default class PlayerController {
         }
     }
 
-    async update(request: Request, response: Response){
+    async update(request: Request, response: Response) {
         const { id } = request.params
 
         const novoRating = await newRating(id)
@@ -30,12 +30,12 @@ export default class PlayerController {
         const result = await db('players').update({ newRating: novoRating }).where('id', id).then(() => {
             console.log(novoRating + " Inserido")
         })
-        
+
         return response.json(novoRating)
     }
 
-    async remove (request: Request, response: Response){
-        const  { id } = request.params
+    async remove(request: Request, response: Response) {
+        const { id } = request.params
 
         const result = await db('players').where('id', id).del()
         updateAll()
@@ -43,17 +43,17 @@ export default class PlayerController {
         return response.json(result)
     }
 
-    async create (request: Request, response: Response)  {
+    async create(request: Request, response: Response) {
         const {
             position,
-            name ,
+            name,
             currentRating,
             newRating,
-    
+
         } = request.body
 
         const trx = await db.transaction();
-    
+
         try {
             await trx('players').insert({
                 position,
@@ -61,18 +61,18 @@ export default class PlayerController {
                 currentRating,
                 newRating,
             })
-            
+
             await trx.commit()
-            
+
             // updateAll()
 
             return response.send()
-        }catch (err) {
+        } catch (err) {
             return response.status(400).json({
                 error: 'Unexpected error while creating new player'
             })
         }
 
-        
+
     }
 }

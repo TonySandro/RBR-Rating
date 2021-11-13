@@ -29,10 +29,14 @@ function CustomizedTables() {
     { id: 0, position: 0, name: '', currentRating: 0, newRating: 0 }
   ])
 
+  const [stage, setStage] = useState([{ nome: '' }])
+
   useEffect(() => {
     api.get('players').then(response => {
       setPlayer(response.data)
     })
+
+    setStage([{ nome: '1950', }, { nome: '1951' }, { nome: 'Etapa X' }])
   }, [])
 
   function handleCreate(e: FormEvent) {
@@ -43,7 +47,7 @@ function CustomizedTables() {
       name,
       currentRating
     }).then(() => {
-      window.location.reload(true)
+      window.location.reload()
     }).catch((err) => {
       console.log(err)
       alert('Erro na insersão!');
@@ -54,36 +58,52 @@ function CustomizedTables() {
 
   return (
     <div>
-      <form onSubmit={handleCreate}>
-        <input
-          type="text"
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => { setName(e.target.value) }}
-        />
-        <input
-          className="number"
-          type="number"
-          placeholder="Posição"
-          value={position}
-          onChange={(e) => { setPosition(e.target.value) }}
-        />
-        <input
-          className="number"
-          type="number"
-          placeholder="Rating atual"
-          value={currentRating}
-          onChange={(e) => { setcurrentRating(e.target.value) }}
-        />
+      <div className="form-pilot">
+        <form onSubmit={handleCreate}>
+          <input
+            type="text"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => { setName(e.target.value) }}
+          />
+          <input
+            className="number"
+            type="number"
+            placeholder="Posição"
+            value={position}
+            onChange={(e) => { setPosition(e.target.value) }}
+          />
+          <input
+            className="number"
+            type="number"
+            placeholder="Rating atual"
+            value={currentRating}
+            onChange={(e) => { setcurrentRating(e.target.value) }}
+          />
 
-        <button type="submit" >Adicionar</button>
-      </form>
+          <button type="submit" >Adicionar</button>
+        </form>
+      </div>
+
+      <div className="stages">
+        {stage.map(item => (
+          <button type="submit" >{item.nome}</button>
+        ))}
+        <form>
+          <input
+            type="text"
+            placeholder="Nova tabela"
+          />
+          <button type="submit">ADD</button>
+        </form>
+      </div>
+
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Posição</StyledTableCell>
-              <StyledTableCell align="right">Nome</StyledTableCell>
+              <StyledTableCell>Nome</StyledTableCell>
               <StyledTableCell align="right">Rating atual</StyledTableCell>
               <StyledTableCell align="right">Novo Rating</StyledTableCell>
             </TableRow>
@@ -94,7 +114,7 @@ function CustomizedTables() {
                 <StyledTableCell component="th" scope="row">
                   {item.position}
                 </StyledTableCell>
-                <StyledTableCell align="right">{item.name}</StyledTableCell>
+                <StyledTableCell>{item.name}</StyledTableCell>
                 <StyledTableCell align="right">{item.currentRating}</StyledTableCell>
                 <StyledTableCell align="right">{item.newRating}</StyledTableCell>
               </StyledTableRow>
