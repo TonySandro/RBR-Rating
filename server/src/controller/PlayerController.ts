@@ -6,10 +6,23 @@ import updateAll from '../util/updateAll';
 export default class PlayerController {
 
     async view(request: Request, response: Response) {
-        const result = await db("players").select("*")
+        const { table } = request.params
+        const result = await db(`${table}`).select("*")
 
         return response.json(result)
     }
+
+    async viewTables(request: Request, response: Response) {
+        const result = await db('sqlite_master').where('type', 'table').then(res => {
+            return res
+        }).catch(er => {
+            console.log(er)
+        })
+
+        return response.json(result)
+    }
+
+    // Atualiza o rating de todos os pilotos
     async updateAll(request: Request, response: Response) {
         try {
             updateAll()
@@ -23,11 +36,11 @@ export default class PlayerController {
     }
 
     async update(request: Request, response: Response) {
-        const { id } = request.params
+        const { id, table } = request.params
 
         const novoRating = await newRating(id)
 
-        const result = await db('players').update({ newRating: novoRating }).where('id', id).then(() => {
+        await db(`${table}`).update({ newRating: novoRating }).where('id', id).then(() => {
             console.log(novoRating + " Inserido")
         })
 
@@ -35,15 +48,16 @@ export default class PlayerController {
     }
 
     async remove(request: Request, response: Response) {
-        const { id } = request.params
+        const { id, table } = request.params
 
-        const result = await db('players').where('id', id).del()
+        const result = await db(`${table}`).where('id', id).del()
         updateAll()
 
         return response.json(result)
     }
 
     async create(request: Request, response: Response) {
+        const { table } = request.params
         const {
             position,
             name,
@@ -55,7 +69,7 @@ export default class PlayerController {
         const trx = await db.transaction();
 
         try {
-            await trx('players').insert({
+            await trx(`${table}`).insert({
                 position,
                 name,
                 currentRating,

@@ -29,15 +29,21 @@ function CustomizedTables() {
     { id: 0, position: 0, name: '', currentRating: 0, newRating: 0 }
   ])
 
-  const [stage, setStage] = useState([{ nome: '' }])
+  const [stage, setStage] = useState([{ name: '', rootpage: 0 }])
 
   useEffect(() => {
-    api.get('players').then(response => {
-      setPlayer(response.data)
+    viewTable('player')
+  }, [])
+
+  function viewTable(table: string) {
+    api.get(`view/${table}`).then(res => {
+      setPlayer(res.data)
     })
 
-    setStage([{ nome: '1950', }, { nome: '1951' }, { nome: 'Etapa X' }])
-  }, [])
+    api.get('viewTables').then(res => {
+      setStage(res.data)
+    })
+  }
 
   function handleCreate(e: FormEvent) {
     e.preventDefault();
@@ -87,7 +93,7 @@ function CustomizedTables() {
 
       <div className="stages">
         {stage.map(item => (
-          <button type="submit" >{item.nome}</button>
+          <button type="button" onClick={() => viewTable(item.name)}>{item.name}</button>
         ))}
         <form>
           <input

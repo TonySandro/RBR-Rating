@@ -4,10 +4,15 @@ import PlayerController from './controller/PlayerController';
 const routes = express.Router();
 const playerController = new PlayerController();
 
-routes.get("/players", playerController.view)
-routes.post("/new_player", playerController.create)
-routes.delete("/remove/:id", playerController.remove)
-routes.put("/newRating/:id", playerController.update)
+routes.get("/viewTables", playerController.viewTables)
+
+routes.get("/view/:table", playerController.view)
+routes.post("/new_player/:table", playerController.create)
+routes.delete("/remove/:id/:table", playerController.remove)
+routes.put("/newRating/:id/:table", playerController.update)
+
+// routes.post("/newStage", playerController.create)
+// routes.delete("/removeStage/:id/:table", playerController.remove)
 
 routes.put("/updateall", playerController.updateAll)
 
