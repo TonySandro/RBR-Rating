@@ -1,24 +1,26 @@
 import db from "../database/connection"
 import newRating from "./newRating"
 
-export default async function updateAll() {
+export default async function updateAll(table?: string) {
     try {
-        const ids = await db('players').select({ id: 'id' })
 
-        const qtdPlayers = await db('players').count({ id: ['id'] })
+        const ids = await db(table).select({ id: 'id' })
+
+        const qtdPlayers = await db(table).count({ id: ['id'] })
 
         const qtd = Number(qtdPlayers[0].id)
 
 
         for (let count = 0; count != qtd; count++) {
-            const novoRating = await newRating(ids[count].id)
+            const novoRating = await newRating(ids[count].id, table)
             if (ids[count] !== undefined) {
-                await db('players').update({ newRating: novoRating }).where('id', ids[count].id)
+                try {
+                    await db(table).update({ newRating: novoRating }).where('id', ids[count].id)
+                } catch (error) {
+                    console.log(error)
+                }
             }
         }
-
-        return console.log("Update all players")
-
     } catch (err) {
         return console.log({
             error: 'Unexpected error while creating new player'

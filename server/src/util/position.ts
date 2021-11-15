@@ -1,6 +1,6 @@
 export default function pegarPosition(posicao: number) {
-    var pontoPS = 1;
-    var position = posicao;
+    let pontoPS = 0;
+    const position = posicao;
 
     if (position >= 22) {
         pontoPS = 0;
@@ -35,19 +35,15 @@ export default function pegarPosition(posicao: number) {
                 console.log("err: default position")
                 break;
         }
-    } else {
-        // for (let p = 4; p != position; p++) {
-        //     pontoPS = pontoPS - 0.1;
-        //     console.log(`Valor de p: ${p}, valor ${pontoPS}`)
-        // }
-
-        let p = 0.9; //posição 
+    } else if(position > 8) {
+        pontoPS = 0.8
+        let p = 9; //posição 
         while (p != position) {
             pontoPS = pontoPS - 0.1;
             p++;
         }
     }
 
-    console.log(`Posição: ${position}, valor ${pontoPS}`)
+    // console.log(`Posição: ${position}, valor ${pontoPS}`)
     return pontoPS
 }

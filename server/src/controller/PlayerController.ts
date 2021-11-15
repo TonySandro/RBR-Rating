@@ -4,7 +4,6 @@ import newRating from '../util/newRating';
 import updateAll from '../util/updateAll';
 
 export default class PlayerController {
-
     async view(request: Request, response: Response) {
         const { table } = request.params
         const result = await db(`${table}`).select("*")
@@ -12,6 +11,7 @@ export default class PlayerController {
         return response.json(result)
     }
 
+    // Ver todas as tabelas criadas no BD
     async viewTables(request: Request, response: Response) {
         const result = await db('sqlite_master').where('type', 'table').then(res => {
             return res
@@ -23,11 +23,11 @@ export default class PlayerController {
     }
 
     // Atualiza o rating de todos os pilotos
-    async updateAll(request: Request, response: Response) {
+    async updateAll(response: Response) {
+        // table?: string
         try {
-            updateAll()
-
-            return response.send()
+            updateAll('players')
+            return response.send(200)
         } catch (error) {
             return response.status(400).json({
                 error: 'Unexpected error while update all players'
@@ -38,7 +38,7 @@ export default class PlayerController {
     async update(request: Request, response: Response) {
         const { id, table } = request.params
 
-        const novoRating = await newRating(id)
+        const novoRating = await newRating(id, table)
 
         await db(`${table}`).update({ newRating: novoRating }).where('id', id).then(() => {
             console.log(novoRating + " Inserido")
@@ -51,7 +51,7 @@ export default class PlayerController {
         const { id, table } = request.params
 
         const result = await db(`${table}`).where('id', id).del()
-        updateAll()
+        updateAll(table)
 
         return response.json(result)
     }
