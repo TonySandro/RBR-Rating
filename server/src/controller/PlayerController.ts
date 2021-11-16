@@ -63,7 +63,6 @@ export default class PlayerController {
             name,
             currentRating,
             newRating,
-
         } = request.body
 
         const trx = await db.transaction();
@@ -74,11 +73,16 @@ export default class PlayerController {
                 name,
                 currentRating,
                 newRating,
+            }).then(res => {
+                console.log("Tudo certo aqui")
+                return res
+            }).catch(err => {
+                console.log(err, "erro aqui")
             })
 
             await trx.commit()
 
-            // updateAll()
+            updateAll(table)
 
             return response.send()
         } catch (err) {
@@ -88,5 +92,43 @@ export default class PlayerController {
         }
 
 
+    }
+
+    async createTable(request: Request, response: Response) {
+        const trx = await db.transaction();
+
+        try {
+            await trx.schema.createTable('Rally', table => {
+                table.increments('id').primary();
+                table.integer('position').notNullable();
+                table.string('name').notNullable();
+                table.integer('currentRating');
+                table.integer('newRating');
+            });
+
+            await trx.commit()
+            return response.send()
+        } catch (err) {
+            return response.status(400).json({
+                error: 'Unexpected error while creating new player'
+            })
+        }
+    }
+
+    async deleteTable(request: Request, response: Response) {
+        const { table } = request.params
+
+        const trx = await db.transaction();
+
+        try {
+            await trx.schema.dropTable(`${table}`);
+            await trx.commit()
+
+            return response.send()
+        } catch (err) {
+            return response.status(400).json({
+                error: 'Unexpected error while creating new player'
+            })
+        }
     }
 }

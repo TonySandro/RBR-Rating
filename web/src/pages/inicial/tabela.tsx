@@ -25,17 +25,41 @@ function CustomizedTables() {
   const [name, setName] = useState('')
   const [currentRating, setcurrentRating] = useState('')
 
+  // Para adicionar o piloto na tabela que está sendo visualizada
+  const [tableSelect, setTableSelect] = useState('')
+
   const [player, setPlayer] = useState([
     { id: 0, position: 0, name: '', currentRating: 0, newRating: 0 }
   ])
 
-  const [stage, setStage] = useState([{ name: '', rootpage: 0 }])
+  const [stage, setStage] = useState([{ name: '', rootpage: 0, status: 'Ativo', background: '#000' }])
+  const [newStage, setNewStage] = useState('')
 
   useEffect(() => {
     viewTable('player')
-  }, [])
+    // ranking()
+  }, []) 
+
+  // function ranking() {
+  //   let copia = [];
+  //   for (let i = 0; i < player.length; i++) {
+  //     let index = 0;
+  //     let maior = 0;
+  //     let nome = ''
+  //     for (let j = 0; j < player.length; j++) {
+  //       if (player[j].newRating >= maior || player[j].name !== nome) {
+  //         maior = player[j].newRating;
+  //         index = j;
+  //         nome = player[j].name
+  //       }
+  //     }
+  //     copia.push(player[index]);
+  //   }
+  // }
 
   function viewTable(table: string) {
+    setTableSelect(table)
+
     api.get(`view/${table}`).then(res => {
       setPlayer(res.data)
     })
@@ -45,13 +69,17 @@ function CustomizedTables() {
     })
   }
 
+  function addStage(nome: string) {
+    setStage(stage.concat({ name: nome, rootpage: 0, background: '#d81414', status: 'Inativo' }))
+    setTableSelect(nome)
+  }
+
   function handleCreate(e: FormEvent) {
     e.preventDefault();
 
-    api.post('/new_player', {
+    api.post(`/new_player/${tableSelect}`, {
       position,
-      name,
-      currentRating
+      name
     }).then(() => {
       window.location.reload()
     }).catch((err) => {
@@ -79,29 +107,24 @@ function CustomizedTables() {
             value={position}
             onChange={(e) => { setPosition(e.target.value) }}
           />
-          <input
-            className="number"
-            type="number"
-            placeholder="Rating atual"
-            value={currentRating}
-            onChange={(e) => { setcurrentRating(e.target.value) }}
-          />
 
-          <button type="submit" >Adicionar</button>
+          <button type="submit">Adicionar</button>
         </form>
       </div>
 
       <div className="stages">
         {stage.map(item => (
-          <button type="button" onClick={() => viewTable(item.name)}>{item.name}</button>
+          <button type="button" style={{ background: `${item.background}` }} onClick={() => viewTable(item.name)}>{item.name}</button>
         ))}
-        <form>
-          <input
-            type="text"
-            placeholder="Nova tabela"
-          />
-          <button type="submit">ADD</button>
-        </form>
+
+        <input
+          type="text"
+          placeholder="Nova tabela"
+          onChange={(e) => {
+            setNewStage(e.target.value)
+          }}
+        />
+        <button type="button" onClick={() => addStage(newStage)} >ADD</button>
       </div>
 
       <TableContainer component={Paper}>
@@ -114,6 +137,7 @@ function CustomizedTables() {
               <StyledTableCell align="right">Novo Rating</StyledTableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {player.map((item) => (
               <StyledTableRow key={item.id}>

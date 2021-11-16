@@ -23,7 +23,7 @@ export default async function updateAll(table?: string) {
         }
     } catch (err) {
         return console.log({
-            error: 'Unexpected error while creating new player'
+            error: 'Unexpected error while updateALL'
         })
     }
 }

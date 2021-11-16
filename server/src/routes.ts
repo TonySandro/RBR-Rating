@@ -16,4 +16,7 @@ routes.put("/newRating/:id/:table", playerController.update)
 
 routes.put("/updateall", playerController.updateAll)
 
+routes.post("/createTable", playerController.createTable)
+routes.delete("/deleteTable", playerController.deleteTable)
+
 export default routes
