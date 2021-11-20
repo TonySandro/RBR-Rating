@@ -2,13 +2,18 @@ import { Request, Response } from 'express';
 import db from '../database/connection';
 import newRating from '../util/newRating';
 import updateAll from '../util/updateAll';
+import createTableEx from '../util/createTable';
 
 export default class PlayerController {
     async view(request: Request, response: Response) {
-        const { table } = request.params
-        const result = await db(`${table}`).select("*")
+        try {
+            const { table } = request.params
+            const result = await db(`${table}`).select("*")
 
-        return response.json(result)
+            return response.json(result)
+        } catch (err) {
+            return err
+        }
     }
 
     // Ver todas as tabelas criadas no BD
@@ -58,26 +63,33 @@ export default class PlayerController {
 
     async create(request: Request, response: Response) {
         const { table } = request.params
-        const {
-            position,
-            name,
-            currentRating,
-            newRating,
-        } = request.body
-
-        const trx = await db.transaction();
 
         try {
+            await db(`${table}`).select("*")
+
+        } catch (err) {
+            console.log('CreateNewTable')
+            await createTableEx(table)
+        }
+
+        try {
+            const {
+                position,
+                name,
+                currentRating,
+                newRating,
+            } = request.body
+
+            const trx = await db.transaction();
             await trx(`${table}`).insert({
                 position,
                 name,
                 currentRating,
                 newRating,
             }).then(res => {
-                console.log("Tudo certo aqui")
                 return res
             }).catch(err => {
-                console.log(err, "erro aqui")
+                console.log(err, " insert error.")
             })
 
             await trx.commit()
@@ -94,20 +106,14 @@ export default class PlayerController {
 
     }
 
+    // Function para criar a tabela diretamente da rota
     async createTable(request: Request, response: Response) {
-        const trx = await db.transaction();
+        const { table } = request.params
 
         try {
-            await trx.schema.createTable('Rally', table => {
-                table.increments('id').primary();
-                table.integer('position').notNullable();
-                table.string('name').notNullable();
-                table.integer('currentRating');
-                table.integer('newRating');
-            });
+            await createTableEx(table)
 
-            await trx.commit()
-            return response.send()
+            return response.send(200)
         } catch (err) {
             return response.status(400).json({
                 error: 'Unexpected error while creating new player'
@@ -127,7 +133,7 @@ export default class PlayerController {
             return response.send()
         } catch (err) {
             return response.status(400).json({
-                error: 'Unexpected error while creating new player'
+                error: 'Unexpected error while delete table.'
             })
         }
     }
