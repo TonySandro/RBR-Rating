@@ -16,17 +16,6 @@ export default class PlayerController {
         }
     }
 
-    // Ver todas as tabelas criadas no BD
-    async viewTables(request: Request, response: Response) {
-        const result = await db('sqlite_master').where('type', 'table').then(res => {
-            return res
-        }).catch(er => {
-            console.log(er)
-        })
-
-        return response.json(result)
-    }
-
     // Atualiza o rating de todos os pilotos
     async updateAll(response: Response) {
         // table?: string
@@ -48,6 +37,7 @@ export default class PlayerController {
         await db(`${table}`).update({ newRating: novoRating }).where('id', id).then(() => {
             console.log(novoRating + " Inserido")
         })
+        updateAll(table)
 
         return response.json(novoRating)
     }
@@ -66,9 +56,7 @@ export default class PlayerController {
 
         try {
             await db(`${table}`).select("*")
-
         } catch (err) {
-            console.log('CreateNewTable')
             await createTableEx(table)
         }
 
@@ -106,35 +94,4 @@ export default class PlayerController {
 
     }
 
-    // Function para criar a tabela diretamente da rota
-    async createTable(request: Request, response: Response) {
-        const { table } = request.params
-
-        try {
-            await createTableEx(table)
-
-            return response.send(200)
-        } catch (err) {
-            return response.status(400).json({
-                error: 'Unexpected error while creating new player'
-            })
-        }
-    }
-
-    async deleteTable(request: Request, response: Response) {
-        const { table } = request.params
-
-        const trx = await db.transaction();
-
-        try {
-            await trx.schema.dropTable(`${table}`);
-            await trx.commit()
-
-            return response.send()
-        } catch (err) {
-            return response.status(400).json({
-                error: 'Unexpected error while delete table.'
-            })
-        }
-    }
 }

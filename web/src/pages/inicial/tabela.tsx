@@ -38,7 +38,7 @@ function CustomizedTables() {
   useEffect(() => {
     viewTable('player')
     // ranking()
-  }, []) 
+  }, [])
 
   // function ranking() {
   //   let copia = [];
@@ -61,10 +61,12 @@ function CustomizedTables() {
     setTableSelect(table)
 
     api.get(`view/${table}`).then(res => {
+      console.log(res.data)
       setPlayer(res.data)
     })
 
     api.get('viewTables').then(res => {
+      console.log(res.data)
       setStage(res.data)
     })
   }
@@ -80,8 +82,9 @@ function CustomizedTables() {
     api.post(`/new_player/${tableSelect}`, {
       position,
       name
-    }).then(() => {
+    }).then(res => {
       window.location.reload()
+      return res
     }).catch((err) => {
       console.log(err)
       alert('Erro na insersão!');
