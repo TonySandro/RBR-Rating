@@ -3,6 +3,7 @@ import db from '../database/connection';
 import newRating from '../util/newRating';
 import updateAll from '../util/updateAll';
 import createTableEx from '../util/createTable';
+import updateUser from '../util/updateUser';
 
 export default class PlayerController {
     async view(request: Request, response: Response) {
@@ -53,6 +54,12 @@ export default class PlayerController {
 
     async create(request: Request, response: Response) {
         const { table } = request.params
+        const {
+            position,
+            name,
+            currentRating,
+            newRating,
+        } = request.body
 
         try {
             await db(`${table}`).select("*")
@@ -61,27 +68,24 @@ export default class PlayerController {
         }
 
         try {
-            const {
-                position,
-                name,
-                currentRating,
-                newRating,
-            } = request.body
+            const checkAddUser = await db(`${table}`).where('name', name)
+            if (checkAddUser[0] === undefined) {
+                const trx = await db.transaction();
+                await trx(`${table}`).insert({
+                    position,
+                    name,
+                    currentRating,
+                    newRating,
+                }).then(res => {
+                    return res
+                }).catch(err => {
+                    console.log(err, " insert error.")
+                })
 
-            const trx = await db.transaction();
-            await trx(`${table}`).insert({
-                position,
-                name,
-                currentRating,
-                newRating,
-            }).then(res => {
-                return res
-            }).catch(err => {
-                console.log(err, " insert error.")
-            })
-
-            await trx.commit()
-
+                await trx.commit()
+            } else {
+                updateUser(checkAddUser[0].id, table, checkAddUser[0].newRating, position)
+            }
             updateAll(table)
 
             return response.send()

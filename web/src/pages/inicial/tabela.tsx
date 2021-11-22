@@ -136,8 +136,8 @@ function CustomizedTables() {
             <TableRow>
               <StyledTableCell>Posição</StyledTableCell>
               <StyledTableCell>Nome</StyledTableCell>
-              <StyledTableCell align="right">Rating atual</StyledTableCell>
-              <StyledTableCell align="right">Novo Rating</StyledTableCell>
+              <StyledTableCell align="right">Rating Anterior</StyledTableCell>
+              <StyledTableCell align="right">Rating Atual</StyledTableCell>
             </TableRow>
           </TableHead>
 
@@ -148,7 +148,7 @@ function CustomizedTables() {
                   {item.position}
                 </StyledTableCell>
                 <StyledTableCell>{item.name}</StyledTableCell>
-                <StyledTableCell align="right">{item.currentRating}</StyledTableCell>
+                <StyledTableCell align="right">{item.currentRating === null ? '0' : item.currentRating}</StyledTableCell>
                 <StyledTableCell align="right">{item.newRating}</StyledTableCell>
               </StyledTableRow>
             ))}
