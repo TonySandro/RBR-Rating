@@ -4,6 +4,7 @@ import newRating from '../util/newRating';
 import updateAll from '../util/updateAll';
 import createTableEx from '../util/createTable';
 import updateUser from '../util/updateUser';
+import orderRank from '../util/orderRank';
 
 export default class PlayerController {
     async view(request: Request, response: Response) {
@@ -11,7 +12,9 @@ export default class PlayerController {
             const { table } = request.params
             const result = await db(`${table}`).select("*")
 
-            return response.json(result)
+            const resultRank = await orderRank(result)
+
+            return response.json(resultRank)
         } catch (err) {
             return err
         }

@@ -20,10 +20,8 @@ const useStyles = makeStyles({
 });
 
 function CustomizedTables() {
-
   const [position, setPosition] = useState('')
   const [name, setName] = useState('')
-  const [currentRating, setcurrentRating] = useState('')
 
   // Para adicionar o piloto na tabela que está sendo visualizada
   const [tableSelect, setTableSelect] = useState('')
@@ -37,25 +35,7 @@ function CustomizedTables() {
 
   useEffect(() => {
     viewTable('player')
-    // ranking()
   }, [])
-
-  // function ranking() {
-  //   let copia = [];
-  //   for (let i = 0; i < player.length; i++) {
-  //     let index = 0;
-  //     let maior = 0;
-  //     let nome = ''
-  //     for (let j = 0; j < player.length; j++) {
-  //       if (player[j].newRating >= maior || player[j].name !== nome) {
-  //         maior = player[j].newRating;
-  //         index = j;
-  //         nome = player[j].name
-  //       }
-  //     }
-  //     copia.push(player[index]);
-  //   }
-  // }
 
   function viewTable(table: string) {
     setTableSelect(table)
@@ -92,6 +72,7 @@ function CustomizedTables() {
   }
 
   const classes = useStyles();
+  let countRank = 1
 
   return (
     <div>
@@ -145,7 +126,7 @@ function CustomizedTables() {
             {player.map((item) => (
               <StyledTableRow key={item.id}>
                 <StyledTableCell component="th" scope="row">
-                  {item.position}
+                  {countRank++}
                 </StyledTableCell>
                 <StyledTableCell>{item.name}</StyledTableCell>
                 <StyledTableCell align="right">{item.currentRating === null ? '0' : item.currentRating}</StyledTableCell>
