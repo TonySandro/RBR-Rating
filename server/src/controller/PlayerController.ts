@@ -62,6 +62,7 @@ export default class PlayerController {
             name,
             currentRating,
             newRating,
+            media
         } = request.body
 
         try {
@@ -89,7 +90,7 @@ export default class PlayerController {
             } else {
                 updateUser(checkAddUser[0].id, table, checkAddUser[0].newRating, position)
             }
-            updateAll(table)
+            updateAll(table, media)
 
             return response.send()
         } catch (err) {

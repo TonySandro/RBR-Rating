@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 function CustomizedTables() {
   const [position, setPosition] = useState('')
   const [name, setName] = useState('')
+  const [media, setMedia] = useState('')
 
   // Para adicionar o piloto na tabela que está sendo visualizada
   const [tableSelect, setTableSelect] = useState('')
@@ -41,12 +42,12 @@ function CustomizedTables() {
     setTableSelect(table)
 
     api.get(`view/${table}`).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setPlayer(res.data)
     })
 
     api.get('viewTables').then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setStage(res.data)
     })
   }
@@ -61,7 +62,8 @@ function CustomizedTables() {
 
     api.post(`/new_player/${tableSelect}`, {
       position,
-      name
+      name,
+      media
     }).then(res => {
       window.location.reload()
       return res
@@ -88,6 +90,13 @@ function CustomizedTables() {
             className="number"
             type="number"
             placeholder="Posição"
+            value={media}
+            onChange={(e) => { setMedia(e.target.value) }}
+          />
+          <input
+            className="number"
+            type="number"
+            placeholder="Média"
             value={position}
             onChange={(e) => { setPosition(e.target.value) }}
           />

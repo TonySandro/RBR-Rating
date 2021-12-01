@@ -1,9 +1,8 @@
 import db from "../database/connection"
 import newRating from "./newRating"
 
-export default async function updateAll(table?: string) {
+export default async function updateAll(table?: string, media?: number) {
     try {
-
         const ids = await db(table).select({ id: 'id' })
 
         const qtdPlayers = await db(table).count({ id: ['id'] })
@@ -12,7 +11,7 @@ export default async function updateAll(table?: string) {
 
 
         for (let count = 0; count != qtd; count++) {
-            const novoRating = await newRating(ids[count].id, table)
+            const novoRating = await newRating(ids[count].id, table, media)
             if (ids[count] !== undefined) {
                 try {
                     await db(table).update({ newRating: novoRating }).where('id', ids[count].id)
