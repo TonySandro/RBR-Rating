@@ -23,16 +23,33 @@ function CustomizedTables() {
   const [position, setPosition] = useState('')
   const [name, setName] = useState('')
   const [media, setMedia] = useState('')
-
   // Para adicionar o piloto na tabela que está sendo visualizada
   const [tableSelect, setTableSelect] = useState('')
-
+  // Para definir a media
+  const [mediaRating, setMediaRating] = useState(
+    { mediaAft: 0, mediaBfr: 0, qtdPilot: 0 }
+  )
   const [player, setPlayer] = useState([
     { id: 0, position: 0, name: '', currentRating: 0, newRating: 0 }
   ])
-
   const [stage, setStage] = useState([{ name: '', rootpage: 0, status: 'Ativo', background: '#000' }])
   const [newStage, setNewStage] = useState('')
+
+  async function allMedia() {
+    let mediaAft1 = 0
+    let mediaBfr1 = 0
+    let qtdPilot1 = 0
+
+    player.map(item => {
+      mediaAft1 += item.currentRating
+      mediaBfr1 += item.newRating
+      qtdPilot1++
+    })
+
+    if (mediaAft1 === 0) mediaAft1 = 100
+
+    setMediaRating({ mediaAft: mediaAft1, mediaBfr: mediaBfr1, qtdPilot: qtdPilot1 })
+  }
 
   useEffect(() => {
     viewTable('player')
@@ -50,6 +67,8 @@ function CustomizedTables() {
       // console.log(res.data)
       setStage(res.data)
     })
+
+    allMedia()
   }
 
   function addStage(nome: string) {
@@ -78,6 +97,11 @@ function CustomizedTables() {
 
   return (
     <div>
+      <div className="dataTable">
+        <h3>Media ranting anterior: {(mediaRating.mediaAft / mediaRating.qtdPilot).toFixed(2)}</h3>
+        <h3>Media ranting atual: {(mediaRating.mediaBfr / mediaRating.qtdPilot).toFixed(2)}</h3>
+        <h3>{mediaRating.qtdPilot} Piloto(os)</h3>
+      </div>
       <div className="form-pilot">
         <form onSubmit={handleCreate}>
           <input

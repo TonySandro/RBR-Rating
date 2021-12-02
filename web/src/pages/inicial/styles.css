@@ -3,7 +3,17 @@
   justify-content: center;
   margin: auto;
   /* width: 50%; */
-  padding: 20px;
+  padding: 10px;
+}
+.dataTable {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  /* width: 50%; */
+}
+
+.dataTable h3 {
+  padding-left: 20px;
 }
 
 .number {
