@@ -73,6 +73,7 @@ export default class PlayerController {
 
         try {
             const checkAddUser = await db(`${table}`).where('name', name)
+            console.log(checkAddUser[0] === undefined)
             if (checkAddUser[0] === undefined) {
                 const trx = await db.transaction();
                 await trx(`${table}`).insert({

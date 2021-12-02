@@ -6,16 +6,14 @@ export default function difCalc(mediaRating: number, ratingAtual: number) {
     var sup = 50, inf = 50;
 
     var diferenca: number
-
-    if (media >= rating) {
-        diferenca = media - rating
-    } else {
-        diferenca = rating - media
-    }
-
     var pontoES: number = 0
 
+    if (media === 0) media = 100
 
+    diferenca = rating - media
+    if (diferenca < 0) diferenca *= (-1)
+
+    console.log(`Calc dif: ${rating} - ${media} = ${diferenca}`)
     if (diferenca >= 0 && diferenca <= 3) {
         positionDif = 0;
         // calcSupInf();
@@ -173,16 +171,10 @@ export default function difCalc(mediaRating: number, ratingAtual: number) {
         console.log(`default err difcalc: ${rating} unexpected`)
     }
 
-    // async function calcSupInf() {
     sup = (sup + positionDif) * 0.01
     inf = (inf - positionDif) * 0.01
 
-    if (rating >= media) {
-        pontoES = sup
-    } else {
-        pontoES = inf
-    }
-    // }
+    if (rating > media) pontoES = sup; else pontoES = inf
 
     return pontoES
 }

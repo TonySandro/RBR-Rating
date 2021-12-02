@@ -90,15 +90,15 @@ function CustomizedTables() {
             className="number"
             type="number"
             placeholder="Posição"
-            value={media}
-            onChange={(e) => { setMedia(e.target.value) }}
+            value={position}
+            onChange={(e) => { setPosition(e.target.value) }}
           />
           <input
             className="number"
             type="number"
             placeholder="Média"
-            value={position}
-            onChange={(e) => { setPosition(e.target.value) }}
+            value={media}
+            onChange={(e) => { setMedia(e.target.value) }}
           />
 
           <button type="submit">Adicionar</button>

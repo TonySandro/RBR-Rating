@@ -4,11 +4,8 @@ import newRating from "./newRating"
 export default async function updateAll(table?: string, media?: number) {
     try {
         const ids = await db(table).select({ id: 'id' })
-
         const qtdPlayers = await db(table).count({ id: ['id'] })
-
         const qtd = Number(qtdPlayers[0].id)
-
 
         for (let count = 0; count != qtd; count++) {
             const novoRating = await newRating(ids[count].id, table, media)
